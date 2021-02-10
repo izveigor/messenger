@@ -1,0 +1,66 @@
+body, html{
+    min-width: 100%;
+    min-height: 100%;
+    background: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.email_div{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #fefefe;
+    width: 45%;
+    height: 45%;
+    padding: 10px;
+}
+
+.email_div p, h1{
+    color: black;
+}
+
+.center-div{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+.information{
+    font-size: 20px;
+}
+
+.input_password{
+    width: 50%;
+    height: 35px;
+    padding-left: 5px;
+    font-size: 14px;
+    border-radius: 0;
+    border-bottom: 1px black solid;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    outline: none;
+}
+.input_password:focus{
+    border-bottom: 1px #afffff solid;
+}
+.change_password_button{
+    background-color: green;
+    color: white;
+    text-align: center;
+    border: 0;
+    padding: 5px 50px;
+}
+.change_password_button:hover{
+    background-color: green;
+    opacity: 0.7;
+    cursor: pointer;
+}
+.margin-vertical-20{
+    margin: 20px 0;
+}
