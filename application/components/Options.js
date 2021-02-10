@@ -59,7 +59,7 @@ function Copyright(){
     return(
         <View style={styles.centerView}>
             <View style={styles.copyright}>
-                <Text style={styles.copyrightText}>Copyright © 2020 - 2021 Igor Izvekov</Text>
+                <Text style={styles.copyrightText}>Copyright © 2021 Igor Izvekov</Text>
                 <Text style={styles.copyrightText}>under GNU GPL v3 license.</Text>
             </View>
         </View>
