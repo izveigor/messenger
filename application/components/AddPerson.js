@@ -1,31 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import {StyleSheet, Text, View, TextInput, ScrollView, Image, TouchableOpacity, Dimensions} from 'react-native';
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, MaterialIcons} from "@expo/vector-icons";
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 export default function AddPerson(){
     const window = Dimensions.get("window");
-    if(window.width < 500)
-        return(
-            <View style={styles.container}>
-                <StatusBar backgroundColor='#0b009e' style="light" />
-                <TextHead/>
-                <Information/>
-                <IdSearch />
-            </View>
-        );
-    else
-        return(
-            <View style={styles.container}>
-                <View style={styles.largeAdd}>
-                    <StatusBar backgroundColor='#0b009e' style="light" />
-                    <TextHead/>
-                    <Information/>
-                    <IdSearch />
-                </View>
-            </View>
+     return(
+        <View style={styles.container}>
+            <StatusBar backgroundColor='#0b009e' style="light" />
+            <Information/>
+            <IdSearch />
+        </View>
         );
 }
 
@@ -35,14 +22,6 @@ function Information(){
             <Text style={styles.text}>
                 If you want to find a person and start to chat with him, you should input his id in a field and press a button "search".
             </Text>
-        </View>
-    )
-}
-
-function TextHead(){
-    return(
-        <View style={styles.head}>
-            <Text style={styles.textHead}>Adding chat:</Text>
         </View>
     )
 }
@@ -75,7 +54,7 @@ function IdSearch(){
     return(
         <View>
             <View style={styles.viewSearch}>
-                <TextInput placeholder='Input an id: '
+                <TextInput placeholder='Id: '
                            style={styles.idSearch}
                            onChangeText={(text) => setText(text)}
                 />
@@ -84,7 +63,6 @@ function IdSearch(){
                     <Text style={styles.buttonSearchText}>Search</Text>
                 </TouchableOpacity>
             </View>
-            <FindPersonView item={item} />
         </View>
     )
 }
@@ -115,15 +93,25 @@ function FindPersonView(props){
         return (
             <View style={styles.findPersonView}>
                 <View style={styles.imageView}>
-
+                    <Image
+            style={styles.iconUser}
+            source={{
+            uri:
+                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+            }}
+        />
                 </View>
-                <View>
-                    <Text>{item.first_name + ' ' + item.last_name}</Text>
+                <View style={styles.firstLastName}>
+                    <Text style={styles.name} >{item.first_name}</Text>
+                    <Text style={styles.name} >{item.last_name}</Text>
                 </View>
-                <View>
-                    <TouchableOpacity style={styles.centerView}
+                <View style={styles.buttons} >
+                    <TouchableOpacity>
+                        <MaterialIcons name="cancel" size={40} color="red" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttonMarginLeft}
                                       onPress={() => AddPersonAPI()}>
-                        <Ionicons name="md-checkmark-circle" size={32} color="green" />
+                        <Ionicons name="md-checkmark-circle" size={40} color="green" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -136,9 +124,7 @@ const styles = StyleSheet.create({
         padding: 15,
         height: '100%',
         minWidth: '100%',
-        justifyContent: 'center',
         alignItems: 'center',
-
     },
     viewSearch: {
         minWidth: "100%",
@@ -150,7 +136,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     idSearch: {
-        borderWidth: 1,
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderBottomWidth: 1,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
         borderColor: 'black',
         fontSize: 18,
         minWidth: '70%',
@@ -193,8 +183,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     findPersonView: {
-        width: "100%",
-        height: 20,
+        minHeight: 50,
+        padding: 5,
+        borderWidth: 2,
+        borderColor: '#d9dbdb',
+        minWidth: "100%",
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 25,
     },
     centerView: {
         justifyContent: 'center',
@@ -204,5 +200,28 @@ const styles = StyleSheet.create({
     imageView: {
         height: 50,
         width: 50,
+    },
+    iconUser: {
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+    },
+    firstLastName: {
+        marginLeft: 10,
+    },
+    name: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    maxSize: {
+        width: '100%',
+        height: '100%'
+    },
+    buttons: {
+        flexDirection: 'row',
+        marginLeft: 'auto'
+    },
+    buttonMarginLeft: {
+        marginLeft: 5
     }
 });

@@ -12,30 +12,16 @@ import backendUrl from './URL'
 
 export default function Options(){
     const window = Dimensions.get("window");
-    if(window.width < 500)
-        return(
-            <View>
-                <StatusBar backgroundColor='#0b009e' style="light" />
-                <OptionsHeader />
-                <HowUse />
-                <LogOut />
-                <ButtonDelete />
-                <Copyright />
-            </View>
+    return(
+        <View>
+            <StatusBar backgroundColor='#0b009e' style="light" />
+            <HowUse />
+            <LogOut />
+            <ChangePassword />
+            <ButtonDelete />
+            <Copyright />
+        </View>
         );
-    else
-        return(
-            <View style={styles.container}>
-                <View style={styles.largeOptions}>
-                    <StatusBar backgroundColor='#0b009e' style="light" />
-                    <OptionsHeader />
-                    <HowUse />
-                    <LogOut />
-                    <ButtonDelete />
-                    <Copyright />
-                </View>
-            </View>
-        )
 }
 
 function ButtonDelete(){
@@ -73,18 +59,31 @@ function Copyright(){
     return(
         <View style={styles.centerView}>
             <View style={styles.copyright}>
-                <Text style={styles.copyrightText}>Copyright © 2021 Igor Izvekov</Text>
+                <Text style={styles.copyrightText}>Copyright © 2020 - 2021 Igor Izvekov</Text>
                 <Text style={styles.copyrightText}>under GNU GPL v3 license.</Text>
             </View>
         </View>
     )
 }
 
-function OptionsHeader(){
-    return(
-        <View style={styles.centerView}>
-            <Text style={styles.optionsHeader}>Options:</Text>
-        </View>
+function ChangePassword(){
+    const change = async() => {
+        return await fetch(backendUrl + '/user/change_password', {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Authorization": token
+            }
+        }).then(function(){
+
+        })
+    }
+    return (
+        <TouchableOpacity style={[styles.buttonOptionRed, {borderWidth: 0}]}
+                          onPress={() => change()}>
+            <Text style={styles.textOption}>Change password</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: StyleSheet.hairlineWidth,
         borderRadius: 5,
-        marginTop: 50,
+        marginTop: 25,
     },
     copyrightText: {
         fontSize: 14,

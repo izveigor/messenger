@@ -5,24 +5,13 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function InputEmail(){
-    const window = Dimensions.get("window");
-    if(window.width < 500)
-        return(
-            <View style={styles.container}>
-                <StatusBar backgroundColor='#0b009e' style="light" />
-                <Text style={styles.h}>Please, enter your email: </Text>
-                <SentEmail />
-            </View>
-        );
-    else
-        return(
-            <View style={styles.container}>
-                <View style={styles.largeInputEmail}>
-                    <Text style={styles.h}>Please, enter your email: </Text>
-                    <SentEmail />
-                </View>
-            </View>
-        );
+    return(
+         <View style={styles.container}>
+            <StatusBar backgroundColor='#0b009e' style="light" />
+            <Text style={styles.h}>Please, enter your email: </Text>
+             <SentEmail />
+         </View>
+    );
 }
 
 function SentEmail(){

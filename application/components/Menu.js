@@ -69,8 +69,6 @@ function Menu(){
     const [register, IsRegister] = useState(false);
     const changeRegister = () => (register) ? IsRegister(false) : IsRegister(true);
 
-    const window = Dimensions.get("window");
-
     const isTokenExist = async() => {
         const token = await AsyncStorage.getItem("@token");
         if(token != null)
@@ -81,30 +79,13 @@ function Menu(){
         isTokenExist();
     });
 
-    console.log(window.width);
-    console.log(window.height);
     if(!register)
         return(
-           // <Provider store={singInDataBase}>
-                <LogIn changeRegister={changeRegister} window={window} store={singInDataBase}/>
-            //</Provider>
+                <LogIn changeRegister={changeRegister} store={singInDataBase}/>
         );
     else
         return(
-          //  <Provider store={registerDataBase}>
-                <Register changeRegister={changeRegister} window={window} store={registerDataBase}/>
-           // </Provider>
-        );
-}
-
-function LogIn(props){
-    if(props.window.width < 500)
-        return(
-            <LogInSmall changeRegister={props.changeRegister.bind(this)} store={props.store} />
-        );
-    else
-        return(
-            <LogInLarge changeRegister={props.changeRegister.bind(this)} store={props.store} />
+                <Register changeRegister={changeRegister} store={registerDataBase}/>
         );
 }
 
@@ -174,18 +155,7 @@ const registerAPI = () =>{
         })
 };
 
-function Register(props){
-    if(props.window.width < 500)
-        return(
-            <RegisterSmall changeRegister={props.changeRegister.bind(this)} store={props.store}/>
-        );
-    else
-        return(
-            <RegisterLarge store={props.store} />
-        );
-}
-
-function LogInSmall(props) {
+function LogIn(props) {
     const emailRef = useRef('email');
     const passwordRef = useRef('password');
     return(
@@ -195,6 +165,7 @@ function LogInSmall(props) {
             <Welcome text='Welcome'/>
             <Input placeholder='email' dictName='email' store={props.store}/>
             <Input placeholder='password' dictName='password' store={props.store}/>
+            <ForgetPassword />
             <ScreenButton text='Sign in' apifunction={SignIn}/>
             <Or/>
             <ChangeButton text='Sign up' check={props.changeRegister}/>
@@ -202,24 +173,7 @@ function LogInSmall(props) {
     );
 }
 
-function LogInLarge(props) {
-    return(
-        <View style={styles.container}>
-            <View style={styles.containerWithBorder}>
-                <StatusBar backgroundColor='white' style="dark"/>
-                <IconLogo/>
-                <Welcome text='Welcome'/>
-                <Input placeholder='email' dictName='email'/>
-                <Input placeholder='password' dictName='password'/>
-                <ScreenButton text='Sign in' apifunction={SignIn}/>
-                <Or/>
-                <ChangeButton text='Sign up' check={props.changeRegister}/>
-            </View>
-        </View>
-    );
-}
-
-function RegisterSmall(props){
+function Register(props){
     return(
         <View style={styles.container}>
             <StatusBar backgroundColor='white' style="dark"/>
@@ -237,24 +191,12 @@ function RegisterSmall(props){
     )
 }
 
-function RegisterLarge(props) {
+function ForgetPassword(){
     return(
-        <View style={styles.container}>
-            <View style={styles.containerWithBorder}>
-                <StatusBar backgroundColor='white' style="dark"/>
-                <IconLogo/>
-                <Welcome text='Register'/>
-                <InputEmail/>
-                <Input placeholder='password' dictName='password' st/>
-                <Input placeholder='first name' dictName='first_name' result={resultRegister}/>
-                <Input placeholder='last name' dictName='last_name' result={resultRegister} />
-                <ChoosePhoto/>
-                <ScreenButton text='Sign up' apifunction={registerAPI}/>
-                <Or/>
-                <ChangeButton text='Sign in' check={props.changeRegister}/>
-            </View>
+        <View>
+            <Text>Forget password?</Text>
         </View>
-    );
+    )
 }
 
 const pickImage = async () => {

@@ -5,7 +5,7 @@ import {EvilIcons} from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import createMessageDataBase from './MessageLocalDatabase'
 import { useFocusEffect } from '@react-navigation/native';
-import backendUrl from "./URL";
+import { backendUrl, backendForWebSocket} from "./URL";
 
 const messageBase = createMessageDataBase;
 
@@ -19,7 +19,7 @@ export default function Chat({ route }, props){
     const getMessage = async() =>{
         const id = await AsyncStorage.getItem("@id");
         const token = await AsyncStorage.getItem("@token");
-        return await fetch('http://17b7bf040efc.ngrok.io/messages/get_messages/', {
+        return await fetch(backendUrl + '/messages/get_messages/', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -42,7 +42,7 @@ export default function Chat({ route }, props){
     };
     console.log(data.group_id);
     let chatSocket = new WebSocket(
-        'ws://' + '5f64c5352dfa.ngrok.io' +
+        'ws://' + backendForWebSocket +
         '/ws/chat/chat/', data.group_id.toString(10)); //,  data.group_id.toString(10));
 
     chatSocket.onmessage = function(e){
@@ -77,7 +77,7 @@ const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [4, 3],
+        aspect: [4, 4],
         quality: 1,
     })
 };
