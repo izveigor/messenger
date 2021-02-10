@@ -8,77 +8,85 @@ export default function InputEmail(){
     return(
          <View style={styles.container}>
             <StatusBar backgroundColor='#0b009e' style="light" />
-            <Text style={styles.h}>Please, enter your email: </Text>
-             <SentEmail />
+            <Information />
+            <SendEmail />
          </View>
     );
 }
 
-function SentEmail(){
+function Information(){
     return(
-        <View style={styles.sentEmail}>
-            <TextInput placeholder='Email: '
-                       style={styles.input} />
-            <ButtonSent />
+        <View style={styles.borderText}>
+            <Text style={styles.text}>
+                If you forgot your password, please, input your email to change it!
+            </Text>
         </View>
     )
 }
 
-function ButtonSent(){
+function SendEmail(){
     return(
-        <TouchableOpacity style={styles.buttonSent}>
-            <Text style={styles.textButtonSent}>Sent</Text>
-        </TouchableOpacity>
-    );
+        <View>
+            <View style={styles.viewSearch}>
+                <TextInput placeholder='Email: '
+                           style={styles.emailSearch}
+                           onChangeText={(text) => setText(text)}
+                />
+                <TouchableOpacity style={styles.buttonSearch}
+                                  onPress={() => FindPerson()}>
+                    <Text style={styles.buttonSearchText}>Search</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         minWidth: '100%',
         minHeight: '100%',
     },
-    h: {
-        fontSize: 26,
-        color: 'black',
-        marginVertical: 15,
-    },
-    input: {
-        borderColor: "black",
-        borderRadius: 0,
-        borderWidth: StyleSheet.hairlineWidth,
-        padding: 5,
-        minWidth: "70%",
-        height: 35,
-    },
-    largeInputEmail: {
-        maxWidth: "50%",
-        maxHeight: "50%",
-        backgroundColor: "white",
+    buttonSearch: {
+        backgroundColor: 'green',
+        color: 'white',
+        width: "30%",
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#d9dbdb',
-        borderRadius: 5,
     },
-    textButtonSent: {
-        color: "white",
+    buttonSearchText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    emailSearch: {
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderBottomWidth: 1,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+        borderColor: 'black',
+        fontSize: 18,
+        minWidth: '70%',
+        paddingLeft: 10,
+    },
+    viewSearch: {
+        width: "100%",
+        flex: 1,
+        flexDirection: 'row',
+        maxHeight: 40,
+    },
+    informationText: {
         fontSize: 18,
     },
-    buttonSent: {
-        minWidth: "30%",
-        height: 35,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "green",
+    borderText: {
+        borderWidth: 2,
+        borderColor: '#d9dbdb',
+        padding: 15,
+        marginBottom: 25,
     },
-    sentEmail: {
-        minWidth: "100%",
-        flex: 1,
-        flexDirection: "row",
-        maxHeight: 35,
-    }
+    text: {
+        fontSize: 18,
+    },
 });

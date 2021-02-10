@@ -69,15 +69,9 @@ function Menu(){
     const [register, IsRegister] = useState(false);
     const changeRegister = () => (register) ? IsRegister(false) : IsRegister(true);
 
-    const isTokenExist = async() => {
-        const token = await AsyncStorage.getItem("@token");
-        if(token != null)
-            navigate('Account');
-    };
-
-    useFocusEffect(() => {
+    /*useFocusEffect(() => {
         isTokenExist();
-    });
+    });*/
 
     if(!register)
         return(
@@ -156,8 +150,6 @@ const registerAPI = () =>{
 };
 
 function LogIn(props) {
-    const emailRef = useRef('email');
-    const passwordRef = useRef('password');
     return(
         <View style={styles.container}>
             <StatusBar backgroundColor='white' style="dark"/>
@@ -193,9 +185,9 @@ function Register(props){
 
 function ForgetPassword(){
     return(
-        <View>
-            <Text>Forget password?</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigate('ForgetPassword')}>
+            <Text style={styles.forgetPassword} >Forgot password?</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -504,6 +496,11 @@ const styles = StyleSheet.create({
         color: 'blue',
         fontSize: 18,
     },
+    forgetPassword: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'blue'
+    }
 });
 
 export default Menu;

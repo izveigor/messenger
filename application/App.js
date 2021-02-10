@@ -13,45 +13,59 @@ import { Ionicons, AntDesign } from '@expo/vector-icons';
 import {navigate, navigationRef} from './components/RefNavigation'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from '@react-navigation/native';
+import InputEmail from './components/InputEmail'
 
 const Stack = createStackNavigator();
 
 export default function App() {
+    /*const isTokenExist = async() => {
+        const token = await AsyncStorage.getItem("@token");
+        if(token != null)
+            console.log("No");
+        else
+            console.log("Yes");
+    };*/
 
-  return (
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator>
-          <Stack.Screen
-              name="Home"
-              component={Menu}
-              options={{ headerShown: false }}
-          />
-          <Stack.Screen
-              name="Account"
-              component={Main}
-              options={() => navigationOptions(null, 'Chat: ', (Dimensions.get("window").width < 500) ?  <HeaderOptions /> : <LargeMain />)}
-          />
-          <Stack.Screen
-                name="Chat"
-                component={Chat}
-                options={() => navigationOptions(1, 'Name: ', (Dimensions.get("window").width < 500) ?  <HeaderOptions /> : <LargeMain />)}
-          />
-          <Stack.Screen
-              name='Options'
-              component={Options}
-              options={() => navigationOptions(1, 'Options: ', null)}
-          />
-          <Stack.Screen
-              name="AddPerson"
-              component={AddPerson}
-              options={navigationOptions(1, 'Adding person: ', null)}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+
+    return (
+        <NavigationContainer ref={navigationRef}>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Home"
+                    component={Menu}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Account"
+                    component={Main}
+                    options={() => navigationOptions(null, 'Chat: ')}
+                />
+                <Stack.Screen
+                    name="Chat"
+                    component={Chat}
+                    options={() => navigationOptions(1, 'Name: ')}
+                />
+                <Stack.Screen
+                    name='Options'
+                    component={Options}
+                    options={() => navigationOptions(1, 'Options: ')}
+                />
+                <Stack.Screen
+                    name="AddPerson"
+                    component={AddPerson}
+                    options={navigationOptions(1, 'Adding person: ')}
+                />
+                <Stack.Screen
+                    name="ForgetPassword"
+                    component={InputEmail}
+                    options={navigationOptions(1, 'Forget password')}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
   );
 }
 
-const navigationOptions = (headerLeft, title, headerRight) =>({
+const navigationOptions = (headerLeft, title) =>({
     title: title,
     headerStyle: {
         backgroundColor: '#0b009e',
@@ -64,9 +78,6 @@ const navigationOptions = (headerLeft, title, headerRight) =>({
     },
     headerTintColor: '#fff',
     headerLeft: (headerLeft == null) ? null : Back,
-    headerRight: () => (
-        headerRight
-    ),
 });
 
 const LargeMain = () =>(
